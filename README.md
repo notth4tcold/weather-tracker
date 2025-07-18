@@ -27,24 +27,6 @@ Uma API REST em Go para monitoramento de clima de cidades, integrando chamadas a
 | **Channels**           | Coordenação e comunicação entre workers      |
 | **Docker Compose**     | Orquestração de app, banco e pgAdmin         |
 
----
-
-## 🧱 Estrutura de Pastas Sugerida
-
-go-weather-tracker/
-├── cmd/ # Arquivo main.go
-├── internal/
-│ ├── api/ # Handlers REST
-│ ├── weather/ # Lógica de chamadas à API externa
-│ ├── updater/ # Goroutines + channels
-│ ├── db/ # Modelos e acesso ao banco
-├── docker/
-│ ├── Dockerfile
-│ └── docker-compose.yml
-└── go.mod
-
----
-
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisitos
