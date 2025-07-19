@@ -11,7 +11,7 @@ RUN go mod tidy
 COPY . .
 
 ENV CGO_ENABLED=0
-RUN go build -o app
+RUN go build -o app ./cmd
 
 FROM alpine:latest
 

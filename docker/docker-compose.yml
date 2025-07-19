@@ -1,0 +1,54 @@
+services:
+  weather-app:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: weather-app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - weather-db
+    restart: unless-stopped
+    environment:
+      DB_HOST: weather-db
+      DB_PORT: 5432
+      DB_USER: mei
+      DB_PASSWORD: mei
+      DB_NAME: weatherdb
+      SERVER_PORT: 8080
+    networks:
+      - backend
+
+  weather-db:
+    image: postgres:15-alpine
+    container_name: weather-db
+    restart: always
+    environment:
+      POSTGRES_USER: mei
+      POSTGRES_PASSWORD: mei
+      POSTGRES_DB: weatherdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - backend
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: weather-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "8081:80"
+    depends_on:
+      - weather-db
+    networks:
+      - backend
+
+volumes:
+  pgdata:
+
+networks:
+  backend:
