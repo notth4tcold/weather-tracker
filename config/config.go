@@ -6,12 +6,13 @@ import (
 )
 
 type Config struct {
-	DBUser     string
-	DBPassword string
-	DBHost     string
-	DBPort     string
-	DBName     string
-	ServerPort string
+	DBUser               string
+	DBPassword           string
+	DBHost               string
+	DBPort               string
+	DBName               string
+	ServerPort           string
+	OpenWeatherMapAPIKey string
 }
 
 func LoadConfig() Config {
@@ -24,11 +25,12 @@ func LoadConfig() Config {
 	}
 
 	return Config{
-		DBUser:     getEnvOrFail("DB_USER"),
-		DBPassword: getEnvOrFail("DB_PASSWORD"),
-		DBHost:     getEnvOrFail("DB_HOST"),
-		DBPort:     getEnvOrFail("DB_PORT"),
-		DBName:     getEnvOrFail("DB_NAME"),
-		ServerPort: getEnvOrFail("SERVER_PORT"),
+		DBUser:               getEnvOrFail("DB_USER"),
+		DBPassword:           getEnvOrFail("DB_PASSWORD"),
+		DBHost:               getEnvOrFail("DB_HOST"),
+		DBPort:               getEnvOrFail("DB_PORT"),
+		DBName:               getEnvOrFail("DB_NAME"),
+		ServerPort:           getEnvOrFail("SERVER_PORT"),
+		OpenWeatherMapAPIKey: getEnvOrFail("OPEN_WEATHER_MAP_API_KEY"),
 	}
 }

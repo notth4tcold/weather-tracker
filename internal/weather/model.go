@@ -1,6 +1,8 @@
 package weather
 
 type WeatherAPIResponse struct {
-	City        string  `json:"city"`
-	Temperature float64 `json:"temp"`
+	Main struct {
+		Temp float64 `json:"temp"`
+	} `json:"main"`
+	Dt int64 `json:"dt"`
 }

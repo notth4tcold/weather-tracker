@@ -4,4 +4,5 @@ type Weather struct {
 	ID          int
 	City        string
 	Temperature float64
+	Timestamp   string
 }

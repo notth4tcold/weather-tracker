@@ -3,29 +3,25 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"log"
 	"weather-tracker/config"
 
 	_ "github.com/lib/pq"
 )
 
-var DB *sql.DB
-
-func Init(cfg config.Config) {
+func Init(cfg config.Config) (*sql.DB, error) {
 	dsn := fmt.Sprintf(
 		"postgres://%s:%s@%s:%s/%s?sslmode=disable",
 		cfg.DBUser, cfg.DBPassword, cfg.DBHost, cfg.DBPort, cfg.DBName,
 	)
 
-	var err error
-	DB, err = sql.Open("postgres", dsn)
+	db, err := sql.Open("postgres", dsn)
 	if err != nil {
-		log.Fatalf("Failed to open DB connection: %v", err)
+		return nil, fmt.Errorf("failed to open DB connection: %w", err)
 	}
 
-	if err := DB.Ping(); err != nil {
-		log.Fatalf("Failed to ping DB: %v", err)
+	if err := db.Ping(); err != nil {
+		return nil, fmt.Errorf("failed to ping DB: %w", err)
 	}
 
-	log.Println("Connected to DB successfully")
+	return db, nil
 }
